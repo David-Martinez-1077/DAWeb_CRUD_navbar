@@ -1,0 +1,88 @@
+{% extends "base_proveedor.html" %}
+
+
+  {% block body %}
+  <div class="row"><!--La fila -->
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!--Columna izquierda-->
+        <h1>Editar</h1>
+        <div class="card"><!--La tarjeta-->
+          <div class="card-body">
+            <form action="/editarProveedor/" method="post" > {% csrf_token %} <!--Falta action-->
+              <div class="form-group">
+                <input type="text" id="txt_idproveedor" name="txt_idproveedor" value="{{proveedor.id_proveedor}}" class="form-control" minlength="1" maxlength="6" required>
+              </div>
+              <div class="form-group py-3">
+                <input type="text" id="txt_nombre" name="txt_nombre" value="{{proveedor.nombre}}" class="form-control"  maxlength="100" required>
+              </div>
+              <div class="form-group">
+                <input type="text" id="num_direccion" name="num_direccion" value="{{proveedor.direccion}}" minlength="1" maxlength="30" class="form-control"  required>
+              </div>
+  
+              <div class="form-group py-3">
+                <input type="text" id="num_tipo" name="num_tipo" value="{{proveedor.tipo_prod}}" minlength="0" maxlength="30" class="form-control"  required>
+              </div>
+  
+              <div class="form-group ">
+                <input type="text" id="txt_cantidad" name="txt_cantidad" value="{{proveedor.cantidad}}" class="form-control"  required>
+              </div>
+  
+              <div class="form-group py-3">
+                <input type="text" id="txt_contacto" name="txt_contacto" value="{{proveedor.contacto}}" minlength="1" maxlength="300" class="form-control"  required>
+              </div>
+  
+              <div class="form-group ">
+                <label for="fecha" id="fech">{{proveedor.fecha}}</label>
+                <input type="date" id="fecha" name="fecha" class="form-control"  required>
+              </div>
+  
+  
+              <div class="form-group py-3">
+                <button type="submit" class="btn btn-primary">Guardar Producto</button>
+              </div>
+  
+  
+            </form>
+          </div>
+        </div> <!--La tarjeta-->
+    </div><!--Columna izquierda-->
+
+  </div>
+
+  <script>
+    const fecha_texto = document.getElementById("fech").innerHTML
+    console.log(fecha_texto)
+
+    function convertirFechaAFormatoDate(fechaTexto) {
+      const meses = {
+                "enero": "01",
+                "febrero": "02",
+                "marzo": "03",
+                "abril": "04",
+                "mayo": "05",
+                "junio": "06",
+                "julio": "07",
+                "agosto": "08",
+                "septiembre": "09",
+                "octubre": "10",
+                "noviembre": "11",
+                "diciembre": "12"
+            };
+
+      const partes = fechaTexto.toLowerCase().split(" de ");
+      const dia = partes[0].padStart(2, "0"); // Asegurar que tenga 2 dígitos
+      const mes = meses[partes[1]];
+      const anio = partes[2];
+
+
+      return `${anio}-${mes}-${dia}`;
+
+        }
+      const fechaFormateada = convertirFechaAFormatoDate(fecha_texto);
+        document.getElementById("fecha").value = fechaFormateada;
+  </script>
+
+    {% endblock %}
+
+   
+
+    

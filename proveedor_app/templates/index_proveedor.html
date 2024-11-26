@@ -1,0 +1,97 @@
+{% extends "base_proveedor.html" %}
+
+{% block body %}
+
+<div class="row"><!--La fila -->
+
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!--Columna izquierda-->
+      <h1>Proveedor</h1>
+      <div class="card"><!--La tarjeta-->
+        <div class="card-body">
+          <form action="registrarProveedor/" method="post" > {% csrf_token %} <!--Falta action-->
+            <div class="form-group">
+              <input type="text" id="txt_idproveedor" name="txt_idproveedor" placeholder="Id del proveedor" class="form-control" minlength="1" maxlength="6" required>
+            </div>
+            <div class="form-group py-3">
+              <input type="text" id="txt_nombre" name="txt_nombre" placeholder="Nombre del proveedor" class="form-control"  maxlength="100" required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="num_direccion" name="num_direccion" placeholder="Dirección del proveedor" minlength="1" maxlength="30" class="form-control"  required>
+            </div>
+
+            <div class="form-group py-3">
+              <input type="text" id="num_tipo" name="num_tipo" placeholder="Tipo de producto" minlength="0" maxlength="30" class="form-control"  required>
+            </div>
+
+            <div class="form-group ">
+              <input type="number" id="txt_cantidad" name="txt_cantidad" placeholder="Cantidad del producto"  class="form-control"  required>
+            </div>
+
+            <div class="form-group py-3">
+              <input type="text" id="txt_contacto" name="txt_contacto" placeholder="Contacto" minlength="1" maxlength="300" class="form-control"  required>
+            </div>
+
+            <div class="form-group ">
+              <input type="date" id="fecha" name="fecha" class="form-control"  required>
+            </div>
+
+
+            <div class="form-group py-3">
+              <button type="submit" class="btn btn-primary">Guardar Producto</button>
+            </div>
+
+
+          </form>
+        </div>
+      </div> <!--La tarjeta-->
+  </div><!--Columna izquierda-->
+
+  <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!--columna derecha -->
+      <h1>Proveedor</h1>
+      <img src="../../static/img/Tips-para-elegir-a-un-proveedor-de-pagos-para-tu-negocio.jpg" style="width: 300px ;" alt="">
+
+      <!-- La tabla  -->
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Id </th>
+              <th scope="col">Nombre </th>
+              <th scope="col">Dirección </th>
+              <th scope="col">Tipo </th>
+              <th scope="col">Cantidad </th>
+              <th scope="col">Contacto </th>
+              <th scope="col">Fecha </th>
+              <th scope="col">Editar</th>
+              <th scope="col">Borrar </th>
+
+              
+            </tr>
+          </thead>
+          <tbody>
+            
+            {% for i in proveedor %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{i.id_proveedor}}</td>
+              <td>{{i.nombre}}</td>
+              <td>{{i.direccion}}</td>
+              <td>{{i.tipo_prod}}</td>
+              <td>{{i.cantidad}}</td>
+              <td>{{i.contacto}}</td>
+              <td>{{i.fecha}}</td>
+              <td><a href="seleccionarProveedor/{{i.id_proveedor}}" class="btn btn-info">Editar</a></td> <!--Falta código-->
+              <td><a href="borrarProveedor/{{i.id_proveedor}}" class="btn btn-danger">Borrar</a></td>
+              
+
+            </tr>
+            {% endfor %}
+            
+          </tbody>
+        </table>
+      <!-- La tabla  -->
+
+  </div><!--columna derecha -->
+</div><!--La fila -->
+
+{% endblock %}
