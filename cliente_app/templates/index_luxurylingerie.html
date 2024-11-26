@@ -1,0 +1,98 @@
+{% extends "base_luxurylingerie.html" %}
+
+{% block body %}
+{% load static %}
+
+<div class="row"><!--La fila -->
+
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!--Columna izquierda-->
+      <h1>cliente</h1>
+      <div class="card"><!--La tarjeta-->
+        <div class="card-body">
+          <form action="registrarCliente/" method="post" > {% csrf_token %} <!--Falta action-->
+            <div class="form-group">
+              <input type="text" id="txt_idcliente" name="txt_idcliente" placeholder="Id del cliente" class="form-control" minlength="1" maxlength="6" required>
+            </div>
+            <div class="form-group py-3">
+              <input type="text" id="txt_nombre" name="txt_nombre" placeholder="Nombre del cliente" class="form-control"  maxlength="100" required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="txt_apellido" name="txt_apellido" placeholder="Apellido del cliente" minlength="1" maxlength="30" class="form-control"  required>
+            </div>
+
+            <div class="form-group py-3">
+              <input type="text" id="txt_telefono" name="txt_telefono" placeholder="Teléfono del cliente" minlength="1" maxlength="30" class="form-control"  required>
+            </div>
+
+            <div class="form-group ">
+              <input type="date" id="fecha" name="fecha" placeholder="fecha" class="form-control"  required>
+            </div>
+
+            <div class="form-group py-3">
+              <input type="text" id="edad" name="edad" placeholder="Edad del cliente" minlength="1" maxlength="30" class="form-control"  required>
+            </div>
+
+            <div class="form-group ">
+              <input type="text" id="genero" name="genero" placeholder="genero"  minlength="1" maxlength="30" class="form-control"  required>
+            </div>
+
+
+            <div class="form-group py-3">
+              <button type="submit" class="btn btn-primary">Guardar Materia</button>
+            </div>
+
+
+          </form>
+        </div>
+      </div> <!--La tarjeta-->
+  </div><!--Columna izquierda-->
+
+  <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!--columna derecha -->
+      <h1>Clientes</h1>
+      <img src="../../static/img/cliente.jpg"  style="width: 300px;" alt="">
+
+      <!-- La tabla  -->
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Id </th>
+              <th scope="col">Nombre </th>
+              <th scope="col">Apellido </th>
+              <th scope="col">Teléfono </th>
+              <th scope="col">fecha </th>
+              <th scope="col">Edad </th>
+              <th scope="col">Género </th>
+              <th scope="col">Editar</th>
+              <th scope="col">Borrar </th>
+
+              
+            </tr>
+          </thead>
+          <tbody>
+            
+            {% for i in cliente %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{i.id_cliente}}</td>
+              <td>{{i.nombre}}</td>
+              <td>{{i.apellido}}</td>
+              <td>{{i.telefono}}</td>
+              <td>{{i.fecha}}</td>
+              <td>{{i.edad}}</td>
+              <td>{{i.genero}}</td>
+              <td><a href="seleccionarCliente/{{i.id_cliente}}" class="btn btn-info">Editar</a></td> <!--Falta código-->
+              <td><a href="borrarCliente/{{i.id_cliente}}" class="btn btn-danger">Borrar</a></td>
+              
+
+            </tr>
+            {% endfor %}
+            
+          </tbody>
+        </table>
+      <!-- La tabla  -->
+
+  </div><!--columna derecha -->
+</div><!--La fila -->
+
+{% endblock %}

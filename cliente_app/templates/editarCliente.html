@@ -1,0 +1,51 @@
+{% extends "base_luxurylingerie.html" %}
+
+
+  {% block body %}
+  <div class="row"><!--La fila -->
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!--Columna izquierda-->
+        <h1>Editar</h1>
+        <div class="card"><!--La tarjeta-->
+          <div class="card-body">
+            <form action="/editarCliente/" method="post" > {% csrf_token %} <!--Falta action-->
+              <div class="form-group">
+                <input type="text" id="txt_idcliente" name="txt_idcliente" value="{{cliente.id_cliente}}" class="form-control" minlength="1" maxlength="6" readonly required>
+              </div>
+              <div class="form-group py-3">
+                <input type="text" id="txt_nombre" name="txt_nombre" value="{{cliente.nombre}}" class="form-control"  maxlength="100" required>
+              </div>
+              <div class="form-group">
+                <input type="text" id="txt_apellido" name="txt_apellido" value="{{cliente.apellido}}"minlength="1" maxlength="30" class="form-control"  required>
+              </div>
+  
+              <div class="form-group py-3">
+
+                <input type="text" id="txt_telefono" name="txt_telefono" value="{{cliente.telefono}}" minlength="1" maxlength="30" class="form-control"  required>
+              </div>
+  
+              <div class="form-group ">
+                <label for="txt_telefono">{{cliente.fecha}}</label>
+                <input type="date" id="fecha" name="fecha" value="{{cliente.fecha}}" class="form-control"  required>
+              </div>
+  
+              <div class="form-group py-3">
+                <input type="text" id="edad" name="edad" value="{{cliente.edad}}" minlength="1" maxlength="30" class="form-control"  required>
+              </div>
+  
+              <div class="form-group ">
+                <input type="text" id="genero" name="genero" value="{{cliente.genero}}" minlength="1" maxlength="30" class="form-control"  required>
+              </div>
+  
+  
+              <div class="form-group py-3">
+                <button type="submit" class="btn btn-primary">Guardar Materia</button>
+              </div>
+  
+  
+            </form>
+          </div>
+        </div> <!--La tarjeta-->
+    </div><!--Columna izquierda-->
+
+  </div>
+    {% endblock %}
