@@ -1,0 +1,96 @@
+{% extends "base_trabajador.html" %}
+
+{% block body %}
+
+<div class="row"><!--La fila -->
+
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!--Columna izquierda-->
+      <h1>Trabajador</h1>
+      <div class="card"><!--La tarjeta-->
+        <div class="card-body">
+          <form action="registrarTrabajador/" method="post" > {% csrf_token %} <!--Falta action-->
+            <div class="form-group">
+              <input type="text" id="txt_idtrabajador" name="txt_idtrabajador" placeholder="Id del Trabajador" class="form-control" minlength="1" maxlength="6" required>
+            </div>
+            <div class="form-group py-3">
+              <input type="text" id="txt_nombre" name="txt_nombre" placeholder="Nombre del Trabajador" class="form-control"  maxlength="100" required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="txt_apellido" name="txt_apellido" placeholder="Apellido del trabajador" minlength="1" maxlength="30" class="form-control"  required>
+            </div>
+
+            <div class="form-group py-3">
+              <input type="text" id="txt_telefono" name="txt_telefono" placeholder="Teléfono" minlength="0" maxlength="30" class="form-control"  required>
+            </div>
+
+            <div class="form-group ">
+              <input type="email" id="txt_gmail" name="txt_gmail" placeholder="Email del trabajador"  class="form-control"  required>
+            </div>
+
+            <div class="form-group py-3">
+              <input type="text" id="txt_curp" name="txt_curp" placeholder="Curp del trabajador" minlength="1" maxlength="300" class="form-control"  required>
+            </div>
+
+            <div class="form-group ">
+              <input type="text" id="txt_rfc" name="txt_rfc" class="form-control" placeholder="RFC del trabajador"  required>
+            </div>
+
+
+            <div class="form-group py-3">
+              <button type="submit" class="btn btn-primary">Guardar Producto</button>
+            </div>
+
+
+          </form>
+        </div>
+      </div> <!--La tarjeta-->
+  </div><!--Columna izquierda-->
+
+  <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!--columna derecha -->
+      <h1>Trabajadores</h1>
+      <img src="../../static/img/trabajador.jpg"  style="width: 200px;" alt="">
+      <!-- La tabla  -->
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Id </th>
+              <th scope="col">Nombre </th>
+              <th scope="col">Apellido </th>
+              <th scope="col">Teléfono </th>
+              <th scope="col">Gmail </th>
+              <th scope="col">Curp </th>
+              <th scope="col">RFC </th>
+              <th scope="col">Editar</th>
+              <th scope="col">Borrar </th>
+
+              
+            </tr>
+          </thead>
+          <tbody>
+            
+            {% for i in trabajador %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{i.id_trabajador}}</td>
+              <td>{{i.nombre}}</td>
+              <td>{{i.apellido}}</td>
+              <td>{{i.telefono}}</td>
+              <td>{{i.gmail}}</td>
+              <td>{{i.curp}}</td>
+              <td>{{i.rfc}}</td>
+              <td><a href="seleccionarTrabajador/{{i.id_trabajador}}" class="btn btn-info">Editar</a></td> <!--Falta código-->
+              <td><a href="borrarTrabajador/{{i.id_trabajador}}" class="btn btn-danger">Borrar</a></td>
+              
+
+            </tr>
+            {% endfor %}
+            
+          </tbody>
+        </table>
+      <!-- La tabla  -->
+
+  </div><!--columna derecha -->
+</div><!--La fila -->
+
+{% endblock %}
